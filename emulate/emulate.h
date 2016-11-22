@@ -1,5 +1,10 @@
 #ifndef __ARDUBOY_EMULATE_H__
 #define __ARDUBOY_EMULATE_H__
+
+#ifdef __WIN32__
+#include <Windows.h>
+#endif
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -20,15 +25,6 @@
 #define OCT 8
 #define BIN 2
 
-class SoftwareSerial {
-public:
-	size_t println(const char str[]) { fprintf(stderr, "%s\r\n", str); return 0; }
-	size_t println(long n) { fprintf(stderr, "%ld\r\n", n); return 0; }
-	void begin(unsigned long, uint8_t = 0) { };
-	operator bool() { return true; }
-};
-
-extern SoftwareSerial Serial;
 
 #define REFS0 0
 #define REFS1 0
@@ -80,27 +76,33 @@ extern SoftwareSerial Serial;
 
 #define 	bit_is_set(sfr, bit)   (_SFR_BYTE(sfr) & _BV(bit))
 
+#ifndef __WIN32__
 typedef bool boolean;
 typedef uint8_t byte;
 typedef uint16_t word;
+#endif
 
 /* == WMATH ====================== */
 	
 void randomSeed(unsigned long seed);
 long random(long howbig);
-long random(long howsmall, long howbig);
+//long random(long howsmall, long howbig);
 long map(long x, long in_min, long in_max, long out_min, long out_max);
 
-unsigned int makeWord(unsigned int w);
+//unsigned int makeWord(unsigned int w);
 unsigned int makeWord(unsigned char h, unsigned char l);
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+#ifndef __WIN32__
 int max(int a, int b);
 int min(int a, int b);
 int abs(int value);
+#else
+typedef uint16_t word;
+#endif
 
 #ifdef __cplusplus
 }

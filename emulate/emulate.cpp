@@ -27,6 +27,7 @@ long map(long x, long in_min, long in_max, long out_min, long out_max) {
 unsigned int makeWord(unsigned int w) { return w; }
 unsigned int makeWord(unsigned char h, unsigned char l) { return (h << 8) | l; }
 
+#ifndef __WIN32__
 int max(int a, int b) {
 	return a > b ? a : b;
 }
@@ -38,6 +39,7 @@ int min(int a, int b) {
 int abs(int value) {
 	return value < 0 ? -value : value;
 }
+#endif
 
 /* =============================== */
 
@@ -74,6 +76,5 @@ void drawSprite(int x, int y, const byte *sheet, byte w, byte h, byte index, byt
   }
 }
 
-SoftwareSerial Serial;
 
 

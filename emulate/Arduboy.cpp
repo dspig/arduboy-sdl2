@@ -2,6 +2,8 @@
 #include "glcdfont.c"
 #include "ab_logo.c"
 
+SoftwareSerial Serial;
+
 Arduboy::Arduboy()
 {
   // frame management

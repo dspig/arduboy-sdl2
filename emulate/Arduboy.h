@@ -215,4 +215,14 @@ protected:
   
 };
 
+class SoftwareSerial {
+public:
+	size_t println(const char str[]) { fprintf(stderr, "%s\r\n", str); return 0; }
+	size_t println(long n) { fprintf(stderr, "%ld\r\n", n); return 0; }
+	void begin(unsigned long, uint8_t = 0) { };
+	operator bool() { return true; }
+};
+
+extern SoftwareSerial Serial;
+
 #endif

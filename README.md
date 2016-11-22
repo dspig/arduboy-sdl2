@@ -11,4 +11,5 @@ For Mac
 
 For PC
 ============
-Work in progress.  I'll get something working with mingw soon.
+1. Install MinGW.
+2. Install SDL 2.0 development headers in MinGW.
