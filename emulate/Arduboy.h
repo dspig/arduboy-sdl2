@@ -5,6 +5,8 @@
 // #include <SPI.h>
 // #include <Print.h>
 #include <limits.h>
+#include <stdint.h>
+#include <stdbool.h>
 
 #include <SDL2/SDL.h>
 
