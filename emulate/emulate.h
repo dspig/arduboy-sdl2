@@ -74,6 +74,8 @@
 #define _SFR_ADDR(sfr) _SFR_MEM_ADDR(sfr)
 #define _SFR_BYTE(sfr) _MMIO_BYTE(_SFR_ADDR(sfr))
 
+#define F(str) (str)
+
 #define 	bit_is_set(sfr, bit)   (_SFR_BYTE(sfr) & _BV(bit))
 
 #ifndef __WIN32__

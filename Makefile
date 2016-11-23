@@ -8,7 +8,10 @@ SKETCH = test1
 SOURCES=$(shell find . \( -name "*.cpp" -o -name "*.c" \) -not -path \"./sketches/*\")
 OBJECTS=$(patsubst %.c,%.o,$(patsubst %.cpp,%.o,$(SOURCES)))
 EXE = bin/$(SKETCH)
+SKETCH_FILES = $(shell find sketches/$(SKETCH)/ -type f -name '*')
 
+$(SKETCH): $(EXE)
+	
 all: $(EXE)
 
 $(EXE): main.o $(OBJECTS)
@@ -16,11 +19,14 @@ $(EXE): main.o $(OBJECTS)
 
 VPATH = libraries:emulate:sketches/$(SKETCH)
 
+main.o: main.cpp $(SKETCH_FILES)
+	$(CXX) $(CXXFLAGS) -DSKETCH=\"sketches/$(SKETCH)/$(SKETCH).ino\" main.cpp -o main.o
+	
 %.o: %.c
-	$(CXX) $(CXXFLAGS) -DSKETCH=\"sketches/$(SKETCH)/$(SKETCH).ino\" $< -o $@
+	$(CXX) $(CXXFLAGS) $< -o $@
 	
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -DSKETCH=\"sketches/$(SKETCH)/$(SKETCH).ino\" $< -o $@
+	$(CXX) $(CXXFLAGS) $< -o $@
 	
 clean:
 	find . -name '*.o' -delete; rm -f $(EXE)

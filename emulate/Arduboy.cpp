@@ -730,6 +730,7 @@ size_t Arduboy::write(uint8_t c)
       write('\n');
     }
   }
+  return 1;
 }
 
 void Arduboy::display()

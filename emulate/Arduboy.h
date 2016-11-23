@@ -3,7 +3,7 @@
 
 #include "core/core.h"
 // #include <SPI.h>
-// #include <Print.h>
+#include <Print.h>
 #include <limits.h>
 #include <stdint.h>
 #include <stdbool.h>
@@ -36,7 +36,7 @@
 // compare temperature to 2.5 internal reference and _BV(MUX5)
 #define ADC_TEMP (_BV(REFS0) | _BV(REFS1) | _BV(MUX2) | _BV(MUX1) | _BV(MUX0))
 
-class Arduboy : /*public Print,*/ public ArduboyCore
+class Arduboy : public Print, public ArduboyCore
 {
 public:
   Arduboy();
