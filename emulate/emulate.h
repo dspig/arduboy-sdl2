@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <time.h>
 #include <inttypes.h>
 
@@ -87,9 +88,11 @@ typedef uint16_t word;
 /* == WMATH ====================== */
 	
 void randomSeed(unsigned long seed);
-long random(long howbig);
+long random(long max);
+long random(long min, long max);
 //long random(long howsmall, long howbig);
 long map(long x, long in_min, long in_max, long out_min, long out_max);
+char *ltoa(long n, char *str, int base);
 
 //unsigned int makeWord(unsigned int w);
 unsigned int makeWord(unsigned char h, unsigned char l);
@@ -105,6 +108,8 @@ int abs(int value);
 #else
 typedef uint16_t word;
 #endif
+
+extern uint8_t sdl_buttons;
 
 #ifdef __cplusplus
 }
@@ -142,8 +147,6 @@ static inline word pgm_read_word(const word *wat) {
 void arduboy_pixel( short x, short y, bool white );
 
 SDL_Renderer * arduboy_renderer();
-
-uint8_t buttonsState();
 
 #define WIDTH 128
 #define HEIGHT 64

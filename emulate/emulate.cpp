@@ -9,20 +9,27 @@ void randomSeed(unsigned long seed) {
   if(seed != 0) srand(seed);
 }
 
-long random(long howbig) {
-  if (howbig == 0) return 0;
-  return rand() % howbig;
+long random(long max) {
+  if (max == 0) return 0;
+  return rand() % max;
 }
 
-long random(long howsmall, long howbig) {
-  if (howsmall >= howbig) return howsmall;
-  long diff = howbig - howsmall;
-  return random(diff) + howsmall;
+long random(long min, long max) {
+  if (min >= max) return min;
+  long diff = max - min;
+  return random(diff) + min;
 }
 
 long map(long x, long in_min, long in_max, long out_min, long out_max) {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
+
+char *ltoa(long n, char *str, int base) {
+	// TODO: handle other bases
+	sprintf(str, "%d", n);
+	return str;
+}
+
 
 unsigned int makeWord(unsigned int w) { return w; }
 unsigned int makeWord(unsigned char h, unsigned char l) { return (h << 8) | l; }

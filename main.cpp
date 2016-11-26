@@ -16,11 +16,7 @@ void logSDLError(std::ostream &os, const std::string &msg){
 // Clip outside of screen drawing
 bool clip = true;
 
-byte sdl_buttons;
-
-uint8_t buttonsState() {
-	return sdl_buttons;
-}
+uint8_t sdl_buttons;
 
 static SDL_Rect rect = {0, 0, 640, 480};
 
@@ -110,20 +106,24 @@ int main(int, char**){
 		return 1;
 	}
 
-		
-	setup();
-	
+	bool reset = true;
 	bool quit = false;
 	SDL_Event e;
 	while (!quit) {
 		while (SDL_PollEvent(&e)){
+
+			if (reset) {
+				setup();
+				reset = false;
+			}
+
 			//If user closes the window
 			if (e.type == SDL_QUIT){
 				quit = true;
 			}
 			
 	        if(e.type == SDL_KEYDOWN) {
-	          if(e.key.keysym.sym == SDLK_ESCAPE) { quit = true; }
+	          if(e.key.keysym.sym == SDLK_ESCAPE || e.key.keysym.sym == SDLK_q) { quit = true; }
 	          else if(e.key.keysym.sym == SDLK_c) clip = !clip;
 	          // Arduboy keypad emulation
 	          else if(e.key.keysym.sym == SDLK_UP   ) sdl_buttons |= UP_BUTTON;  // Up
@@ -140,6 +140,7 @@ int main(int, char**){
 	          else if(e.key.keysym.sym == SDLK_DOWN ) sdl_buttons &= ~DOWN_BUTTON;  // Down
 	          else if(e.key.keysym.sym == SDLK_z    ) sdl_buttons &= ~A_BUTTON;  // A
 	          else if(e.key.keysym.sym == SDLK_x    ) sdl_buttons &= ~B_BUTTON;  // B
+	          else if(e.key.keysym.sym == SDLK_r    ) reset = true;  // B
 	        }			
 		}	
 			

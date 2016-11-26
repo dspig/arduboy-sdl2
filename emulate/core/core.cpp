@@ -61,26 +61,5 @@ uint8_t ArduboyCore::getInput()
 
 uint8_t ArduboyCore::buttonsState()
 {
-  uint8_t buttons;
-  
-//   // using ports here is ~100 bytes smaller than digitalRead()
-// #ifdef AB_DEVKIT
-//   // down, left, up
-//   buttons = ((~PINB) & B01110000);
-//   // right button
-//   buttons = buttons | (((~PINC) & B01000000) >> 4);
-//   // A and B
-//   buttons = buttons | (((~PINF) & B11000000) >> 6);
-// #elif defined(ARDUBOY_10)
-//   // down, up, left right
-//   buttons = ((~PINF) & B11110000);
-//   // A (left)
-//   buttons = buttons | (((~PINE) & B01000000) >> 3);
-//   // B (right)
-//   buttons = buttons | (((~PINB) & B00010000) >> 2);
-// #endif
-
-// TODO: fix
-  buttons = 0;  
-  return buttons;
+	return sdl_buttons;
 }
